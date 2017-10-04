@@ -25,10 +25,10 @@ public class Assignment1 {
         frame.setLayout(new BorderLayout());
 
         JTextArea textArea = new JTextArea();
-        JButton btn = new JButton("Open File Explorer");
-        JButton btn1 = new JButton("Load File to Text Area");
+        JButton openExplorerBtn = new JButton("Open File Explorer");
+        JButton loadBtn = new JButton("Load File to Text Area");
 
-        btn.addActionListener(new ActionListener() {
+        openExplorerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FileHandler fh = null;
@@ -51,7 +51,7 @@ public class Assignment1 {
 
                     logger.info("Selected file: " + selectedFile.getAbsolutePath());
                 }
-                btn1.addActionListener(new ActionListener() {
+                loadBtn.addActionListener(new ActionListener() {
 
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -108,8 +108,8 @@ public class Assignment1 {
         });
 
         frame.add(textArea, BorderLayout.CENTER);
-        frame.add(btn, BorderLayout.NORTH);
-        frame.add(btn1, BorderLayout.SOUTH);
+        frame.add(openExplorerBtn, BorderLayout.NORTH);
+        frame.add(loadBtn, BorderLayout.SOUTH);
         JScrollPane scroll = new JScrollPane (textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         frame.add(scroll);
