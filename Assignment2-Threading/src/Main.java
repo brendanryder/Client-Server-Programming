@@ -1,3 +1,9 @@
+/*
+Author: Brendan Ryder
+Client Server Programming
+Assignment 2
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,7 +12,6 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.logging.FileHandler;
-import java.util.logging.Formatter;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.zip.ZipEntry;
@@ -17,13 +22,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Date date = new Date();
-        System.out.println(date.toString());
         JFrame frame = new JFrame("Brendan Ryder - Assignment 2");
         Logger logger = Logger.getLogger("MyLog");
         FileHandler fh;
 
         // This block configure the logger with handler and formatter
+
+        //Change output path of logfile to one of your choice
         fh = new FileHandler("C:/temp/test/MyLogFile.log", true);
+
         logger.addHandler(fh);
         SimpleFormatter formatter = new SimpleFormatter();
         fh.setFormatter(formatter);
@@ -55,9 +62,9 @@ public class Main {
                 // This block configure the logger with handler and formatter
 
                 logger.info("Loading File . . .");
-                DataInputStream in = null;
+                BufferedReader in = null;
                 try {
-                    in = new DataInputStream(new FileInputStream(selectedFile.getAbsolutePath()));
+                    in = new BufferedReader(new FileReader(selectedFile.getAbsolutePath()));
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
@@ -83,6 +90,7 @@ public class Main {
                 long res = (end - start) / 1000000;
                 logger.info("File Loaded");
                 logger.info("Time to display file contents: " + (res) + "ms");
+                textArea.append("\n\n\tTime to display file contents: " + (res) + "ms");
                 try {
                     in.close();
                 } catch (IOException e1) {
@@ -91,17 +99,12 @@ public class Main {
                 return null;
             }
         };
-        SwingWorker a = new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                return null;
-            }
-        };
 
         SwingWorker zip = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
 
+                //Path where zip file is output to
                 String zipFilePath = "C:\\Users\\Brendan\\Desktop\\testZipped.zip";
                 try {
 
@@ -167,7 +170,6 @@ public class Main {
         zipBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 zip.execute();
             }
         });
